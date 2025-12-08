@@ -5,82 +5,82 @@
     class omniMath{
         public:
             enum UnitType {
-                // Length (Base: Meter)
-                METER,
-                KILOMETER,
-                CENTIMETER,
-                MILLIMETER,
-                INCH,
-                FOOT,
-                YARD,
-                MILE,
+                // Length (Base: m)
+                m,
+                km,
+                cm,
+                mm ,
+                in,
+                ft,
+                yd,
+                mi,
 
-                // Mass (Base: Kilogram)
-                KILOGRAM,
-                GRAM,
-                MILLIGRAM,
-                POUND,
-                OUNCE,
+                // Mass (Base: kg)
+                kg,
+                g,
+                mg,
+                lb,
+                oz,
 
                 // Energy (Base: WATTtHour)
-                MILIWATTHOUR,
-                WATTHOUR,
-                KILOWATTHOUR,
-                GIGAWATTHOUR,
-                JOULE,        // New: 1 Wh = 3600 J
-                KILOJOULE,    // New
-                MEGAJOULE,    // New
-                CALORIE,      // New: 1 cal = 4.184 J
-                KILOCALORIE,  // New
+                mWh,
+                Wh,
+                kWh,
+                GWh,
+                J,        // New: 1 Wh = 3600 J
+                kJ,    // New
+                MJ,    // New
+                cal,      // New: 1 cal = 4.184 J
+                kcal,  // New
                 BTU,          // New: British Thermal Unit
                 
-                // Charge (Base: AmpHour)
-                MILIAMPHOUR,
-                AMPHOUR,
-                KILOAMPHOUR,
-                CULOMB, 
+                // Charge (Base: Ah)
+                mAh,
+                Ah,
+                kAh,
+                C, 
 
-                // Torque (Base: Newton-meter)
-                MILINM,
+                // Torque (Base: Newton-m)
+                mNM,
                 NM,
-                KILONM,
-                MEGANM,
-                GRAMSPERCENTIMETER,    
-                KILOGRAMSPERCENTIMETER, 
-                TONSPERCENTIMETER,      
-                GRAMSPERMILIMETER,
-                KILOGRAMSPERMILIMETER,
-                OUNCEPERINCH,           
+                kNM,
+                MNM,
+                gPERcm,    
+                kgPERcm, 
+                tPERcm,      
+                gPERmm,
+                kgPERmm,
+                ozPERin,           
 
-                // Angle speed (Base: radians per second)
-                RADIANPERSECOND,
-                REVOLUTIONSPERMINUTE,   
-                DEGREESPERSECOND,
+                // Angle speed (Base: rads per second)
+                radPERs,
+                RPM,   
+                degPERs,
 
-                // Pressure (Base: pascal)
-                PASCAL,
-                KILOPASCAL,
-                HECTOPASCAL,
-                BAR,
-                PSI,
-                TECHNICALATM, 
+                // Pressure (Base: Pa)
+                Pa,
+                kPa,
+                hPa,
+                bar,
+                psi,
+                tAtm, 
 
-                // Angle (base: degree)
-                DEGRE,
-                RADIAN,
-                GRAD,
+                // Angle (base: dege)
+                deg,
+                rad,
+                grad,
                 DMS, 
 
-                // Different bases (base: DECIMALmal)
-                DECIMAL,
-                OCTAGONAL,
-                HEXADECIMAL,
-                BINARY,
+                // Different bases (base: decmal)
+                dec,
+                oct,
+                hex,
+                bin,
 
-                // Temperature (Base: Celsius)
-                CELSIUS,
-                FAHRENHEIT,
-                KELVIN,
+                // Temperature (Base: degC)
+                degC,
+                degF,
+                K,
 
                 // Error flag
                 UNKNOWN
