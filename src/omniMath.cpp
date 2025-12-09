@@ -585,17 +585,16 @@ bool omniMath::findString(String mainString, String strToFind){
  * input:   value
  * output:  1 if correct, 0 if not
 */
-bool isLength(UnitType t) { return (t >= m && t <= mi); }
-bool isMass(UnitType t) { return (t >= kg && t <= oz); }
-// Updated range for Energy to include BTU
-bool isEnergy(UnitType t) { return (t >= mWh && t <= BTU); } 
-bool isCharge(UnitType t) { return (t >= mAh && t <= C); }
-bool isTorque(UnitType t) { return (t >= mNM && t <= ozPERin); }
-bool isAngleSpeed(UnitType t) { return (t >= radPERs && t <= degPERs); }
-bool isPressure(UnitType t) { return (t >= Pa && t <= tAtm); }
-bool isAngle(UnitType t) { return (t >= deg && t <= DMS); }
-bool isBase(UnitType t) { return (t >= dec && t <= bin); }
-bool isTemp(UnitType t) { return (t >= degC && t <= K); }
+bool isLength(omniMath::UnitType t) { return (t >= omniMath::m && t <= omniMath::mi); }
+bool isMass(omniMath::UnitType t) { return (t >= omniMath::kg && t <= omniMath::oz); }
+bool isEnergy(omniMath::UnitType t) { return (t >= omniMath::mWh && t <= omniMath::BTU); } 
+bool isCharge(omniMath::UnitType t) { return (t >= omniMath::mAh && t <= omniMath::C); }
+bool isTorque(omniMath::UnitType t) { return (t >= omniMath::mNM && t <= omniMath::ozPERin); }
+bool isAngleSpeed(omniMath::UnitType t) { return (t >= omniMath::radPERs && t <= omniMath::degPERs); }
+bool isPressure(omniMath::UnitType t) { return (t >= omniMath::Pa && t <= omniMath::tAtm); }
+bool isAngle(omniMath::UnitType t) { return (t >= omniMath::deg && t <= omniMath::DMS); }
+bool isBase(omniMath::UnitType t) { return (t >= omniMath::dec && t <= omniMath::bin); }
+bool isTemp(omniMath::UnitType t) { return (t >= omniMath::degC && t <= omniMath::K); }
 
 
 /*
@@ -604,7 +603,7 @@ bool isTemp(UnitType t) { return (t >= degC && t <= K); }
  * input:   value
  * output:  1 if correct, 0 if not
 */
-String omniMath::convertUnit(String strValue, UnitType from, UnitType to) {
+String omniMath::convertUnit(String strValue, omniMath::UnitType from, omniMath::UnitType to) {
     //=== Declaring variables ===
     double value = strValue.toDouble();
     
