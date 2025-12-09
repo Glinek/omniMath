@@ -3,7 +3,6 @@
 
 # omniMath Library
 A comprehensive Arduino library for evaluating mathematical expressions, handling Reverse Polish Notation (RPN), and performing unit conversions.
-
 ## Features
 * **Expression Evaluation**: Parse and solve string equations (e.g., `"2+2*2"`) respecting order of operations.
 * **Advanced Math Functions**: Support for trigonometry, logarithms, roots, powers, factorials, and percentages.
@@ -11,11 +10,13 @@ A comprehensive Arduino library for evaluating mathematical expressions, handlin
 * **Unit Conversion**: Built-in conversion for length, mass, temperature, pressure, energy, charge, angle, torque, and number bases.
 * **Constants**: Easy access to mathematical constants like PI and Euler's number.
 
+
 ## Instalation
 There are two ways to install this library:
 1. Download this repository as .zip and include it using Arduino IDE (Sketch>>Include Library>>Add .ZIP Library...)
 ![image](https://github.com/user-attachments/assets/76835efe-9595-47fe-bc95-d909f662d4a9)
 2. Add this library from Arduino IDE's library manager by typing *omniMath* and selecting *omniMath by Szymon GLinka*
+
 
 # Documentation
 ### Initialization
@@ -24,7 +25,6 @@ To use the library, include the header file and create an instance of the `omniM
 #include <omniMath.h>
 omniMath omniMath;
 ```
-
 ### RPN
 The library allows converting infix notation (standard) to RPN and evaluating it.   
 **Note:** When using `convertToRPN`, operators and numbers **must NOT** be separated by spaces in the input string.
@@ -34,7 +34,6 @@ String rpn = omniMath.convertToRPN("321+4*(43-12*4)*3.5");
 // 2. Evaluate RPN
 String result = omniMath.evaluateRPN(rpn);
 ```
-
 ### Evaluate
 The `evaluate()` function parses a mathematical string and returns the result. It supports standard arithmetic operators: +, -, *, /, ^, and ( ).
 **Note:** When using `evaluate`, you can either input math equation OR math function. **You can NOT mix it**
@@ -71,9 +70,6 @@ String piVal = omniMath.evaluate("pi");
 | Other | Random | `rand MIN MAX STEP` / `rndNum MIN MAX STEP` / `rndnum MIN MAX STEP` | Random number in range with step |
 | Constants | Pi | `pi` / `pi DECIMAL_PLACES` | Pi value (default 11 decimal places) |
 | Constants | Euler | `e` / `e DECIMAL_PLACES` | e value (default 11 decimal places) |
-
-
-
 ### Unit Conversion
 Use `convertUnit()` to convert values between different unit systems. The function takes the value (string), source unit, and target unit.
 ```cpp
@@ -88,6 +84,7 @@ omniMath.convertUnit("1", omniMath.kg, omniMath.lb);
 // Charge: mAh to Coulombs
 omniMath.convertUnit("2500", omniMath.mAh, omniMath.C);
 ```
+Use the syntax `omniMath.UNIT_NAME` (e.g., `omniMath.km`).
 | Category | Library Syntax (units) |
 |----------|------------------------|
 | Length | `m`, `km`, `cm`, `mm`, `in` (Inch), `ft` (Foot), `yd` (Yard), `mi` (Mile) |
@@ -100,3 +97,22 @@ omniMath.convertUnit("2500", omniMath.mAh, omniMath.C);
 | Angle Speed | `radPERs`, `RPM`, `degPERs` |
 | Torque | `NM`, `mNM`, `kNM`, `MNM`, `kgPERcm`, `ozPERin`, `gPERcm`, `tPERcm` |
 | Number Base | `dec` (Decimal), `hex` (Hexadecimal), `oct` (Octal), `bin` (Binary) |
+
+
+# License
+This library is licensed under Creative Commons CC BY 4.0 available [here](license)
+**You are free to:**    
+- Share — copy and redistribute the material in any medium or format for any purpose, even commercially.    
+- Adapt — remix, transform, and build upon the material for any purpose, even commercially. The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+**Under the following terms:**    
+- Attribution — You must give appropriate credit , provide a link to the license, and indicate if changes were made . You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.    
+- No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+  
+**Notices:**    
+You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation .    
+No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.    
+
+# Author
+This library has been created by **Szymon *Glinek* Glinka** to help with development of custom firmware for PicoCalc
+
