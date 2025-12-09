@@ -56,19 +56,22 @@ String piVal = omniMath.evaluate("pi");
 | Trig | Arc Tangent | `atg VAL` / atan VAL | Arc tangent, returns degrees |
 | Powers | Square | `sq VA`L | Square of a value |
 | Powers | Cube | `cb VAL` | Cube of a value |
-| Powers | Power | `pw VAL POW` | Value to the power of exponent |
-| Powers | Ten Power | `tenPw POW` | 10 to the power of exponent |
+| Powers | Power | `pw VAL POW` / `VAL pw POW` / `pow VAL POW` / `VAL pow POW` | Value to the power of exponent |
+| Powers | Ten Power | `tenPw POW` / `tenpw PWO` | 10 to the power of exponent |
 | Roots | Square Root | `sqrt VAL` | Square root of a value |
 | Roots | Cube Root | `cbrt VAL` | Cube root of a value |
-| Roots | N-th Root | `VAL rt ROOT` | Specific root of a value |
+| Roots | N-th Root | `rt VAL ROOT` / `VAL rt ROOT` | Specific root of a value |
 | Logs | Natural | `nlog VAL` | Natural logarithm (ln) |
 | Logs | Base 10 | `tlog VAL` | Logarithm base 10 |
 | Logs | Custom Base | `log BASE VAL` | Logarithm with custom base |
 | Other | Percent | `pcnt BASE VAL` | What % of BASE is VAL |
 | Other | Inverse | `inv VAL` | Inverts value (1/x) |
-| Other | Modulo | `mod VAL DIV` | Remainder of division |
-| Other | Factorial | `fact VAL` | Factorial (x!), max input 12 |
-| Other | Random | `rand MIN MAX STEP` | Random number in range with step |
+| Other | Modulo | `mod VAL DIV` / `VAL mod DIV` | Remainder of division |
+| Other | Factorial | `fact VAL` / `fct VAL` | Factorial (x!), max input 12 |
+| Other | Random | `rand MIN MAX STEP` / `rndNum MIN MAX STEP` / `rndnum MIN MAX STEP` | Random number in range with step |
+| Constants | Pi | `pi` / `pi DECIMAL_PLACES` | Pi value (default 11 decimal places) |
+| Constants | Euler | `e` / `e DECIMAL_PLACES` | e value (default 11 decimal places) |
+
 
 
 ### Unit Conversion
@@ -85,3 +88,15 @@ omniMath.convertUnit("1", omniMath.kg, omniMath.lb);
 // Charge: mAh to Coulombs
 omniMath.convertUnit("2500", omniMath.mAh, omniMath.C);
 ```
+| Category | Library Syntax (units) |
+|----------|------------------------|
+| Length | `m`, `km`, `cm`, `mm`, `in` (Inch), `ft` (Foot), `yd` (Yard), `mi` (Mile) |
+| Mass | `kg`, `g`, `mg`, `lb` (Pound), `oz` (Ounce) |
+| Temperature | `degC` (Celsius), `degF` (Fahrenheit), `K` (Kelvin) |
+| Pressure | `Pa`, `kPa`, `hPa`, `bar`, `psi`, `tAtm` (Technical Atm) |
+| Energy | `Wh`, `mWh`, `kWh`, `GWh`, `J`, `kJ`, `MJ`, `cal`, `kcal`, `BTU` |
+| Charge | `Ah`, `mAh`, `kAh`, `C` (Coulomb) |
+| Angle | `deg` (Degree), `rad` (Radian), `grad`, `DMS` |
+| Angle Speed | `radPERs`, `RPM`, `degPERs` |
+| Torque | `NM`, `mNM`, `kNM`, `MNM`, `kgPERcm`, `ozPERin`, `gPERcm`, `tPERcm` |
+| Number Base | `dec` (Decimal), `hex` (Hexadecimal), `oct` (Octal), `bin` (Binary) |
