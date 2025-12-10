@@ -15,7 +15,7 @@ A comprehensive Arduino library for evaluating mathematical expressions, handlin
 There are two ways to install this library:
 1. Download this repository as .zip and include it using Arduino IDE (Sketch>>Include Library>>Add .ZIP Library...)
 ![image](https://github.com/user-attachments/assets/76835efe-9595-47fe-bc95-d909f662d4a9)
-2. Add this library from Arduino IDE's library manager by typing *omniMath* and selecting *omniMath by Szymon GLinka*
+2. Add this library from Arduino IDE's library manager by typing *omniMath* and selecting *omniMath by Szymon Glinka*
 
 
 # Documentation
@@ -115,4 +115,5 @@ No warranties are given. The license may not give you all of the permissions nec
 
 # Author
 This library has been created by **Szymon *Glinek* Glinka** to help with development of custom firmware for PicoCalc
+
 
