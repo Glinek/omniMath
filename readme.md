@@ -68,8 +68,8 @@ String piVal = omniMath.evaluate("pi");
 | Other | Modulo | `mod VAL DIV` / `VAL mod DIV` | Remainder of division |
 | Other | Factorial | `fact VAL` / `fct VAL` | Factorial (x!), max input 12 |
 | Other | Random | `rand MIN MAX STEP` / `rndNum MIN MAX STEP` / `rndnum MIN MAX STEP` | Random number in range with step |
-| Constants | Pi | `pi` / `pi DECIMAL_PLACES` | Pi value (default 11 decimal places) |
-| Constants | Euler | `e` / `e DECIMAL_PLACES` | e value (default 11 decimal places) |
+| Constants | Pi | `pi` / `pi DECIMAL_PLACES` | Pi value (default 11 decimal places) up to 100 decimal places when specified |
+| Constants | Euler | `e` / `e DECIMAL_PLACES` | e value (default 11 decimal places) up to 100 decimal places when specified |
 ### Unit Conversion
 Use `convertUnit()` to convert values between different unit systems. The function takes the value (string), source unit, and target unit.
 ```cpp
@@ -115,5 +115,6 @@ No warranties are given. The license may not give you all of the permissions nec
 
 # Author
 This library has been created by **Szymon *Glinek* Glinka** to help with development of custom firmware for PicoCalc
+
 
 
