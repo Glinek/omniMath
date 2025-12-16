@@ -15,7 +15,7 @@ A comprehensive Arduino library for evaluating mathematical expressions, handlin
 There are two ways to install this library:
 1. Download this repository as .zip and include it using Arduino IDE (Sketch>>Include Library>>Add .ZIP Library...)
 ![image](https://github.com/user-attachments/assets/76835efe-9595-47fe-bc95-d909f662d4a9)
-2. Add this library from Arduino IDE's library manager by typing *omniMath* and selecting *omniMath by Szymon GLinka*
+2. Add this library from Arduino IDE's library manager by typing *omniMath* and selecting *omniMath by Szymon Glinka*
 
 
 # Documentation
@@ -68,8 +68,8 @@ String piVal = omniMath.evaluate("pi");
 | Other | Modulo | `mod VAL DIV` / `VAL mod DIV` | Remainder of division |
 | Other | Factorial | `fact VAL` / `fct VAL` | Factorial (x!), max input 12 |
 | Other | Random | `rand MIN MAX STEP` / `rndNum MIN MAX STEP` / `rndnum MIN MAX STEP` | Random number in range with step |
-| Constants | Pi | `pi` / `pi DECIMAL_PLACES` | Pi value (default 11 decimal places) |
-| Constants | Euler | `e` / `e DECIMAL_PLACES` | e value (default 11 decimal places) |
+| Constants | Pi | `pi` / `pi DECIMAL_PLACES` | Pi value (default 11 decimal places) up to 100 decimal places when specified |
+| Constants | Euler | `e` / `e DECIMAL_PLACES` | e value (default 11 decimal places) up to 100 decimal places when specified |
 ### Unit Conversion
 Use `convertUnit()` to convert values between different unit systems. The function takes the value (string), source unit, and target unit.
 ```cpp
@@ -115,4 +115,6 @@ No warranties are given. The license may not give you all of the permissions nec
 
 # Author
 This library has been created by **Szymon *Glinek* Glinka** to help with development of custom firmware for PicoCalc
+
+
 
