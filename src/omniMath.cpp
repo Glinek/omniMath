@@ -595,7 +595,7 @@ bool isPressure(omniMath::UnitType t) { return (t >= omniMath::Pa && t <= omniMa
 bool isAngle(omniMath::UnitType t) { return (t >= omniMath::deg && t <= omniMath::DMS); }
 bool isBase(omniMath::UnitType t) { return (t >= omniMath::dec && t <= omniMath::bin); }
 bool isTemp(omniMath::UnitType t) { return (t >= omniMath::degC && t <= omniMath::K); }
-
+bool isSpeed(omniMath::UnitType t) { return (t >= omniMath::kph && t <= omniMath::mmPERs); }
 
 /*
  * name:    isUNIT
@@ -603,7 +603,7 @@ bool isTemp(omniMath::UnitType t) { return (t >= omniMath::degC && t <= omniMath
  * input:   value
  * output:  1 if correct, 0 if not
 */
-String omniMath::convertUnit(String strValue, omniMath::UnitType from, omniMath::UnitType to) {
+String omniMath::convertUnit(String strValue, UnitType from, UnitType to) {
     //=== Declaring variables ===
     double value = strValue.toDouble();
     
@@ -652,12 +652,14 @@ String omniMath::convertUnit(String strValue, omniMath::UnitType from, omniMath:
         if (from == kg) valKg = value;
         else if (from == g) valKg = value * 0.001;
         else if (from == mg) valKg = value * 0.000001;
+        else if (from == t) valKg = value * 1000;
         else if (from == lb) valKg = value * 0.453592;
         else if (from == oz) valKg = value * 0.0283495;
 
         if (to == kg) return String(valKg, 6);
         else if (to == g) return String(valKg / 0.001, 6);
         else if (to == mg) return String(valKg / 0.000001, 6);
+        else if (to == t) return String(valKg / 1000, 6);
         else if (to == lb) return String(valKg / 0.453592, 6);
         else if (to == oz) return String(valKg / 0.0283495, 6);
     }
@@ -788,12 +790,40 @@ String omniMath::convertUnit(String strValue, omniMath::UnitType from, omniMath:
         if (from == Ah) valAh = value;
         else if (from == mAh) valAh = value / 1000.0;
         else if (from == kAh) valAh = value * 1000.0;
+        else if (from == mC) valAh = value / 3600000.0;
+        else if (from == kC) valAh = value / 3.6;
         else if (from == C) valAh = value / 3600.0;
         
         if (to == Ah) return String(valAh, 4);
         else if (to == mAh) return String(valAh * 1000.0, 4);
+        else if (to == mC) return String(valAh * 3600000.0, 4);
+        else if (to == kC) return String(valAh * 3.6, 4);
         else if (to == kAh) return String(valAh / 1000.0, 6);
         else if (to == C) return String(valAh * 3600.0, 2);
+    }
+
+    //=== Converting speed ===
+    else if (isSpeed(from) && isSpeed(to)) {
+        double valMs = 0;
+        if(from == kph) valMs = value/3.6;
+        else if(from == mph) valMs = value*0/44704;
+        else if(from == kn) valMs = value*0.534444;
+        else if(from == ftPERs) valMs = value*0.3048;
+        else if(from == Ma) valMs = value*340.3;
+        else if(from == ms) valMs = value;
+        else if(from == mPERmin) valMs = value/60;
+        else if(from == kmPERs) valMs = value*1000;
+        else if(from == mmPERs) valMs = value*0.001;
+
+        if(to == kph) return String(valMs*3.6, 4);
+        else if(to == mph) return String(valMs*2.23694, 4);
+        else if(to == kn) return String(valMs*1.94384, 4);
+        else if(to == ftPERs) return String(valMs*3.28084, 4);
+        else if(to == Ma) return String(valMs*0.002938, 4);
+        else if(to == ms) return String(valMs, 4);
+        else if(to == mPERmin) return String(valMs*60, 4);
+        else if(to == kmPERs) return String(valMs*0.001, 4);
+        else if(to == mmPERs) return String(valMs*1000, 4);
     }
 
     //=== Return error bc units wrong ===

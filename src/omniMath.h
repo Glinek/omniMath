@@ -18,6 +18,7 @@
                 // Mass (Base: kg)
                 kg,
                 g,
+                t,
                 mg,
                 lb,
                 oz,
@@ -38,6 +39,8 @@
                 mAh,
                 Ah,
                 kAh,
+                mC,
+                kC,
                 C, 
 
                 // Torque (Base: Newton-m)
@@ -82,9 +85,20 @@
                 degF,
                 K,
 
+                // Speed (base: m/s)
+                kph,
+                mph,
+                kn,
+                ftPERs,
+                Ma,
+                ms,
+                mPERmin,
+                kmPERs,
+                mmPERs,
+
                 // Error flag
                 UNKNOWN
-                };
+            };
 
             String convertToRPN(String equation);
             String evaluateRPN(String rpnEquation);
