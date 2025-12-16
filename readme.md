@@ -97,7 +97,7 @@ Use the syntax `omniMath.UNIT_NAME` (e.g., `omniMath.km`).
 | Angle Speed | `radPERs`, `RPM`, `degPERs` |
 | Torque | `NM`, `mNM`, `kNM`, `MNM`, `kgPERcm`, `ozPERin`, `gPERcm`, `tPERcm` |
 | Number Base | `dec` (Decimal), `hex` (Hexadecimal), `oct` (Octal), `bin` (Binary) |
-| Speed | `kph` (km/h), `kn` (knots), `ftPERs` (ft/s), `Ma` (Mach at see level), `ms` (m/s), `mPERmin` (m/min), `kmPERs` (km/s), `mmPERs` (mm/s) |
+| Speed | `kph` (km/h), `mph` (mi/h), `kn` (knots), `ftPERs` (ft/s), `Ma` (Mach at see level), `ms` (m/s), `mPERmin` (m/min), `kmPERs` (km/s), `mmPERs` (mm/s) |
 
 
 # License
@@ -116,6 +116,7 @@ No warranties are given. The license may not give you all of the permissions nec
 
 # Author
 This library has been created by **Szymon *Glinek* Glinka** to help with development of custom firmware for PicoCalc
+
 
 
 
