@@ -251,45 +251,47 @@ String omniMath::evaluate(String expresion){
         if(findString(expresion, " ")){
             //---- Creating variables and spliting the string ----
             String trigArray[3];
+            expresion.replace("(", "");
+            expresion.replace(")", "");
             float value, evaluated;
             splitString(expresion, ' ', trigArray, 3);
             //
-            //---- sine in degrees ----
+            //---- sine in deges ----
             if(trigArray[0] == "sin"){
                 value = trigArray[1].toFloat();
                 evaluated = sin((mathPi/180)*value);
                 return String(evaluated, 4);
             }
             //
-            //---- cosine in degrees ----
+            //---- cosine in deges ----
             else if(trigArray[0] == "cos"){
                 value = trigArray[1].toFloat();
                 evaluated = cos((mathPi/180)*value);
                 return String(evaluated, 4);
             } 
             //
-            //---- tangent in degrees ----
+            //---- tangent in deges ----
             else if(trigArray[0] == "tg" || trigArray[0] == "tan"){
                 value = trigArray[1].toFloat();
                 evaluated = tan((mathPi/180)*value);
                 return String(evaluated, 4);
             }
             //
-            //---- asine in degrees ----
+            //---- asine in deges ----
             else if(trigArray[0] == "asin"){
                 value = trigArray[1].toFloat();
                 evaluated = asin(value)*(180/mathPi);
                 return String(evaluated, 4);
             } 
             //
-            //---- acosine in degrees ----
+            //---- acosine in deges ----
             else if(trigArray[0] == "acos"){
                 value = trigArray[1].toFloat();
                 evaluated = acos(value)*(180/mathPi);
                 return String(evaluated, 4);
             } 
             //
-            //---- atangent in degrees ----
+            //---- atangent in deges ----
             else if(trigArray[0] == "atg" || trigArray[0] == "atan"){
                 value = trigArray[1].toFloat();
                 evaluated = atan(value)*(180/mathPi);
@@ -363,6 +365,8 @@ String omniMath::evaluate(String expresion){
         //---- Looks if the function has a space (so probably an argument) ----
         if(findString(expresion, " ")){
             //---- Creating variables and spliting the string ----
+            expresion.replace("(", "");
+            expresion.replace(")", "");
             String powArray[5];
             double value1, value2, evaluated;
             splitString(expresion, ' ', powArray, 5);
@@ -466,6 +470,8 @@ String omniMath::evaluate(String expresion){
         if(findString(expresion, " ") || findString(expresion, "pi") || findString(expresion, "euler") || findString(expresion, "e")){
             //---- Creating variables and spliting the string ----
             String otherArray[5];
+            expresion.replace("(", "");
+            expresion.replace(")", "");
             splitString(expresion, ' ', otherArray, 5);
             //
             //---- factorials, up to 12 ----
@@ -493,12 +499,12 @@ String omniMath::evaluate(String expresion){
                 return String(evaluated);
             }
             //
-            //---- pi with a given decimal places ----
+            //---- pi with a given dec places ----
             else if(otherArray[0] == "pi" && otherArray[1] != ""){
-                int maxDecimals = strlen_P(PI_CONSTANT) - 2;
-                int decimal = otherArray[1].toInt();
-                if (decimal > maxDecimals) decimal= maxDecimals;
-                int totalLength = decimal + 2;
+                int maxdecs = strlen_P(PI_CONSTANT) - 2;
+                int dec = otherArray[1].toInt();
+                if (dec > maxdecs) dec= maxdecs;
+                int totalLength = dec + 2;
                 char buffer[totalLength + 1];
                 strncpy_P(buffer, PI_CONSTANT, totalLength);
                 buffer[totalLength] = '\0';
@@ -511,12 +517,12 @@ String omniMath::evaluate(String expresion){
                 return "3.14159265359";
             }
             //
-            //---- euler with a given decimal places ----
+            //---- euler with a given dec places ----
             else if(otherArray[0] == "euler" && otherArray[1] != "" || otherArray[0] == "e" && otherArray[1] != ""){
-                int maxDecimals = strlen_P(E_CONSTANT) - 2;
-                int decimal = otherArray[1].toInt();
-                if (decimal > maxDecimals) decimal= maxDecimals;
-                int totalLength = decimal + 2;
+                int maxdecs = strlen_P(E_CONSTANT) - 2;
+                int dec = otherArray[1].toInt();
+                if (dec > maxdecs) dec= maxdecs;
+                int totalLength = dec + 2;
                 char buffer[totalLength + 1];
                 strncpy_P(buffer, E_CONSTANT, totalLength);
                 buffer[totalLength] = '\0';
@@ -536,13 +542,15 @@ String omniMath::evaluate(String expresion){
     //=== Evaluating expresion ===
     else if(findString(expresion, "+") || findString(expresion, "-") || findString(expresion, "*") || findString(expresion, "/") || findString(expresion, "^")){
         if(expresion.length()>2){
-            String rpnEquation = convertToRPN(expresion);
-            return evaluateRPN(rpnEquation);
+            String rpnEquation = convertToRPN(expresion);     
+            return evaluateRPN(rpnEquation);;
         }
         else return "Err: too little arguments!";
     }
 
     //=== Return expresion if nothing happened ===
+    expresion.replace("(", "");
+    expresion.replace(")", "");
     return expresion;
 }
 
