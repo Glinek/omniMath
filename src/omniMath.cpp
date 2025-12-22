@@ -8,61 +8,51 @@
  * output:  RPN equation as string
 */
 String omniMath::convertToRPN(String equation){
+    //=== Fixing equation ===
+    //---- Removing spaces ----
+    equation.replace(" ", ""); // Usuń spacje
+    //
+    //---- fixing double operators ----
+    for(int i=0; i<2; i++) { 
+       equation.replace("--", "+");
+       equation.replace("++", "+");
+       equation.replace("+-", "-");
+       equation.replace("-+", "-");
+    }
+    //
+    //---- fixing equation starting from operator
+    if (equation.startsWith("-")) equation = "0" + equation;
+    else if (equation.startsWith("+")) equation = "0" + equation;
+    equation.replace("(-", "(0-");
+    equation.replace("(+", "(0+");
+
     //=== Declaring variables ===
     String convertedEquation = "";
-    String operatorStack[15] = {"", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
+    // Zwiększyłem stos do 30, bo trik z zerem dodaje znaki
+    String operatorStack[30]; 
+    // Inicjalizacja pustymi stringami
+    for(int j=0; j<30; j++) operatorStack[j] = ""; 
+    
     String currentChar = "", previousChar = "";
     int operatorStackCount = 0, whilePcounter = 1, whileOcounter = 1;
     bool runElse = false, escapeWhile = false;
 
     //=== Itterating through the entire string ===
     for(int i=0; i < equation.length(); i++){
-        //-- Setting currentChar variable to current character from equation --
         currentChar = String(equation[i]);
 
-        //========================================================================
-        //=== FIX: UNARY MINUS CHECK (Obsługa liczb ujemnych) ===
-        // Jeśli napotkamy "-", sprawdzamy czy jest to znak liczby (unarny)
-        // Jest unarny, jeśli to pierwszy znak W OGÓLE lub poprzedni znak to operator/nawias
-        if (currentChar == "-") {
-            bool isUnary = false;
-            if (i == 0) {
-                isUnary = true;
-            } else {
-                char prev = equation.charAt(i - 1);
-                // Sprawdzamy czy poprzedni znak to operator lub nawias otwierający
-                if (prev == '+' || prev == '-' || prev == '*' || prev == '/' || prev == '^' || prev == '(') {
-                    isUnary = true;
-                }
-            }
-
-            if (isUnary) {
-                // To jest część liczby, dodajemy bezpośrednio do wyjścia
-                convertedEquation += currentChar;
-                continue; // Pomijamy resztę pętli, żeby nie wpadło do sekcji operatorów
-            }
-        }
-        //========================================================================
-
         //---- If currentChar is a number or a . add it to covertedEquation ----
-        if(currentChar == "0" || currentChar == "1" || currentChar == "2" || currentChar == "3" || currentChar == "4" || currentChar == "5" || currentChar == "6" || currentChar == "7" || currentChar == "8" || currentChar == "9" || currentChar == "."){
+        if((currentChar >= "0" && currentChar <= "9") || currentChar == "."){
             convertedEquation += currentChar;
         }
         //
         //---- Else perform RPN operator shenanigans ----
-        /*
-         * RPN operator algorythm:
-         * ... (bez zmian w logice operatorów) ...
-         */
-        //---- Operator is + or - or * or / or ^ shenanigans ----
         else if(currentChar == "+" || currentChar == "-" || currentChar == "*" || currentChar == "/" || currentChar == "^"){
-            //---- If last character isn't space add it to convertedEquation ----
-            // Ważne: Sprawdzamy czy ostatni znak to nie spacja ORAZ czy convertedEquation nie jest puste
+            // Dodaj spację jeśli jej nie ma
             if(convertedEquation.length() > 0 && String(convertedEquation[convertedEquation.length()-1]) != " ") {
                 convertedEquation += " ";
             }
             
-            //---- While operator stack is not empty and previous operator has grater precedance that current one procede ----
             while(operatorStackCount > 0 && !escapeWhile){
                 previousChar = operatorStack[operatorStackCount-whileOcounter];
 
@@ -79,11 +69,9 @@ String omniMath::convertToRPN(String equation){
                     operatorStackCount++;
                 }
             }
-            //---- Reset variables ----
             whileOcounter = 1;
             escapeWhile = false;
 
-            //---- If operator stack is empty add operator to it ----
             if(operatorStackCount == 0 || runElse){
                 operatorStack[operatorStackCount] = currentChar;
                 operatorStackCount++;
@@ -99,28 +87,29 @@ String omniMath::convertToRPN(String equation){
         else if(currentChar == ")"){
             if(convertedEquation.length() > 0 && String(convertedEquation[convertedEquation.length()-1]) != " ") convertedEquation += " ";
             
-            while(operatorStack[operatorStackCount-whilePcounter] != "("){
+            while(operatorStackCount > 0 && operatorStack[operatorStackCount-whilePcounter] != "("){
                 convertedEquation += operatorStack[operatorStackCount-whilePcounter];
                 operatorStack[operatorStackCount-whilePcounter] = "";
                 convertedEquation += " ";
                 whilePcounter++;
             }
             
-            operatorStackCount = operatorStackCount-whilePcounter;
-            operatorStack[operatorStackCount] = "";
+            //---- Tbh i dont remember
+            if (operatorStackCount >= whilePcounter) {
+                operatorStackCount = operatorStackCount-whilePcounter;
+                operatorStack[operatorStackCount] = "";
+            }
             whilePcounter = 1;
         }
     }
-    
+
     //---- Pop every operator that is left in stack when at the end of equation ----
     while(operatorStackCount > 0){
         operatorStackCount--;
-        // Dodajemy spację przed operatorem, jeśli jej nie ma
         if(convertedEquation.length() > 0 && String(convertedEquation[convertedEquation.length()-1]) != " ") convertedEquation += " ";
         convertedEquation += operatorStack[operatorStackCount];
     }
 
-    //=== Return converted equation ===
     return convertedEquation;
 }
 
