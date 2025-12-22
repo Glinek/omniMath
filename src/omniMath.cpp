@@ -11,49 +11,67 @@ String omniMath::convertToRPN(String equation){
     //=== Declaring variables ===
     String convertedEquation = "";
     String operatorStack[15] = {"", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
-    String currentChar = "", previousChar = "", currentWhileChar;
-    int operatorStackCount = 0, charCount = 0, whilePcounter = 1, whileOcounter = 1;
+    String currentChar = "", previousChar = "";
+    int operatorStackCount = 0, whilePcounter = 1, whileOcounter = 1;
     bool runElse = false, escapeWhile = false;
 
     //=== Itterating through the entire string ===
-    for(int i=0; i<=equation.length(); i++){
+    for(int i=0; i < equation.length(); i++){
         //-- Setting currentChar variable to current character from equation --
         currentChar = String(equation[i]);
-        //
+
+        //========================================================================
+        //=== FIX: UNARY MINUS CHECK (Obsługa liczb ujemnych) ===
+        // Jeśli napotkamy "-", sprawdzamy czy jest to znak liczby (unarny)
+        // Jest unarny, jeśli to pierwszy znak W OGÓLE lub poprzedni znak to operator/nawias
+        if (currentChar == "-") {
+            bool isUnary = false;
+            if (i == 0) {
+                isUnary = true;
+            } else {
+                char prev = equation.charAt(i - 1);
+                // Sprawdzamy czy poprzedni znak to operator lub nawias otwierający
+                if (prev == '+' || prev == '-' || prev == '*' || prev == '/' || prev == '^' || prev == '(') {
+                    isUnary = true;
+                }
+            }
+
+            if (isUnary) {
+                // To jest część liczby, dodajemy bezpośrednio do wyjścia
+                convertedEquation += currentChar;
+                continue; // Pomijamy resztę pętli, żeby nie wpadło do sekcji operatorów
+            }
+        }
+        //========================================================================
+
         //---- If currentChar is a number or a . add it to covertedEquation ----
         if(currentChar == "0" || currentChar == "1" || currentChar == "2" || currentChar == "3" || currentChar == "4" || currentChar == "5" || currentChar == "6" || currentChar == "7" || currentChar == "8" || currentChar == "9" || currentChar == "."){
             convertedEquation += currentChar;
-            charCount++;
         }
         //
         //---- Else perform RPN operator shenanigans ----
         /*
          * RPN operator algorythm:
-         * if stack is empty -> add operator to it
-         * if stack is not empty:
-         *   and operator on the stack has grater or equal precedance to the current one -> pop operator from stack to equation as long as precedance of the one in stack is grater or equal than the current one
-         *   and operator on the stack has lower precedance than the current one -> add it to operator stack
-         *   and operator is ( -> add it to operator stack
-         *   and operator is ) -> pop all operators from stuck untill (
-        */
+         * ... (bez zmian w logice operatorów) ...
+         */
         //---- Operator is + or - or * or / or ^ shenanigans ----
         else if(currentChar == "+" || currentChar == "-" || currentChar == "*" || currentChar == "/" || currentChar == "^"){
             //---- If last character isn't space add it to convertedEquation ----
-            if(String(convertedEquation[convertedEquation.length()-1]) != " ") convertedEquation += " ";
-            //
+            // Ważne: Sprawdzamy czy ostatni znak to nie spacja ORAZ czy convertedEquation nie jest puste
+            if(convertedEquation.length() > 0 && String(convertedEquation[convertedEquation.length()-1]) != " ") {
+                convertedEquation += " ";
+            }
+            
             //---- While operator stack is not empty and previous operator has grater precedance that current one procede ----
             while(operatorStackCount > 0 && !escapeWhile){
-                //-- Set previous char from operator stack --
                 previousChar = operatorStack[operatorStackCount-whileOcounter];
-                //-- Check for grater precedance, previous char not being ( and operator stack not being empty---
-                //-- If true, add the operator to converted equation --
+
                 if(greaterPrecedence(previousChar, currentChar) && previousChar != "(" && operatorStackCount-whileOcounter >= 0){
                     convertedEquation += previousChar;
                     convertedEquation += " ";
                     operatorStack[operatorStackCount-whileOcounter] = "";
                     whileOcounter++;
                 }
-                //-- else add operator to stack and escape this while loop --
                 else{
                     escapeWhile = true;
                     operatorStackCount = operatorStackCount-whileOcounter+1;
@@ -61,11 +79,10 @@ String omniMath::convertToRPN(String equation){
                     operatorStackCount++;
                 }
             }
-            //
             //---- Reset variables ----
             whileOcounter = 1;
             escapeWhile = false;
-            //
+
             //---- If operator stack is empty add operator to it ----
             if(operatorStackCount == 0 || runElse){
                 operatorStack[operatorStackCount] = currentChar;
@@ -75,36 +92,32 @@ String omniMath::convertToRPN(String equation){
         }
         //---- Operator is ( shenanigans ---
         else if(currentChar == "("){
-            //-- Add it to operator stack --
             operatorStack[operatorStackCount] = currentChar;
             operatorStackCount++;
         }
         //---- Operator is ) shenanigans ----
         else if(currentChar == ")"){
-            //-- Add space to converted equation --
-            convertedEquation += " ";
-            //
-            //-- While operator in stack is not ( pop operators to converted equation --
+            if(convertedEquation.length() > 0 && String(convertedEquation[convertedEquation.length()-1]) != " ") convertedEquation += " ";
+            
             while(operatorStack[operatorStackCount-whilePcounter] != "("){
                 convertedEquation += operatorStack[operatorStackCount-whilePcounter];
                 operatorStack[operatorStackCount-whilePcounter] = "";
                 convertedEquation += " ";
                 whilePcounter++;
             }
-            //
-            //-- Set variables after a lot of poping --
+            
             operatorStackCount = operatorStackCount-whilePcounter;
             operatorStack[operatorStackCount] = "";
             whilePcounter = 1;
         }
-        //
-        //---- Pop every operator that is left in stack when at the end of equation ----
-        while(operatorStackCount > 0 && i == equation.length()){
-            operatorStackCount--;
-            convertedEquation += " ";
-            convertedEquation += operatorStack[operatorStackCount];
-            
-        }
+    }
+    
+    //---- Pop every operator that is left in stack when at the end of equation ----
+    while(operatorStackCount > 0){
+        operatorStackCount--;
+        // Dodajemy spację przed operatorem, jeśli jej nie ma
+        if(convertedEquation.length() > 0 && String(convertedEquation[convertedEquation.length()-1]) != " ") convertedEquation += " ";
+        convertedEquation += operatorStack[operatorStackCount];
     }
 
     //=== Return converted equation ===
