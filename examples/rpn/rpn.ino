@@ -11,7 +11,7 @@
 #include <omniMath.h>
 
 //=== Create omniMath object ===
-omniMath omniMath;
+omniMath myMath;
 
 void setup() {
     //=== Initialize Serial connection ===
@@ -25,7 +25,7 @@ void loop() {
      * IMPORTANT! operators and numbers can not be separated by a space!
      * This function takes equation as a string as an input and returns equation converted to RPN as a string. 
      */
-    String rpnEquation = omniMath.convertToRPN("321+4*(43-12*4)*3.5+43-1+2^3");
+    String rpnEquation = myMath.convertToRPN("321+4*(43-12*4)*3.5+43-1+2^3");
     //
     //---- Printing RPN ----
     Serial.print("RPN equation: ");
@@ -35,7 +35,7 @@ void loop() {
     /* 
      *  evaluateRPN evaluates RPN equation. It takes RPN equation as a string as an input and returns evaluated equation also as a string
      */
-    String evaluatedRpn = omniMath.evaluateRPN(rpnEquation);
+    String evaluatedRpn = myMath.evaluateRPN(rpnEquation);
     //
     //---- Printing evaluated RPN ----
     Serial.print(" evaluated RPN: ");

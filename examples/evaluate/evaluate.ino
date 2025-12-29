@@ -10,7 +10,7 @@
 #include <omniMath.h>
 
 //=== Initializing library ===
-omniMath omniMath;
+omniMath myMath;
 
 void setup() {
     //=== Initialize Serial connection ===
@@ -27,7 +27,7 @@ void loop() {
      * evaluate function parses and solves standard mathematical equations.
      * It handles order of operations for addition, subtraction, multiplication, division and parentheses.
      */
-    String eval1 = omniMath.evaluate("23+54*4+(34-5+3)*2.58");
+    String eval1 = myMath.evaluate("23+54*4+(34-5+3)*2.58");
     //
     //---- Printing result ----
     Serial.print("Equation: ");
@@ -38,7 +38,7 @@ void loop() {
      * Calculates trigonometric values (sin, cos, tan, etc.).
      * Input angle is in degrees. Example: "sin 30" returns 0.5.
      */
-    String eval2 = omniMath.evaluate("sin 30");
+    String eval2 = myMath.evaluate("sin 30");
     //
     //---- Printing result ----
     Serial.print("Sine 30deg: ");
@@ -49,7 +49,7 @@ void loop() {
      * Calculates N-th root of a value using syntax "VALUE rt ROOT".
      * In this example: 6th root of 64.
      */
-    String eval3 = omniMath.evaluate("64 rt 6");
+    String eval3 = myMath.evaluate("64 rt 6");
     //
     //---- Printing result ----
     Serial.print("Root 6th root of 64: ");
@@ -60,7 +60,7 @@ void loop() {
      * Generates a random number within a range with a specific step.
      * Syntax: "rand MIN MAX STEP".
      */
-    String eval4 = omniMath.evaluate("rand 0 10 0.1");
+    String eval4 = myMath.evaluate("rand 0 10 0.1");
     //
     //---- Printing result ----
     Serial.print("Random number between 0 and 10, step 0.1: ");
@@ -71,7 +71,7 @@ void loop() {
      * Returns mathematical constants.
      * "pi" returns value of PI, "e" or "euler" returns Euler's number.
      */
-    String eval5 = omniMath.evaluate("pi");
+    String eval5 = myMath.evaluate("pi");
     //
     //---- Printing result ----
     Serial.print("Pi: ");

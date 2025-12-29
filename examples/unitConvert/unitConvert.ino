@@ -10,7 +10,7 @@
 #include <omniMath.h>
 
 //=== Initializing library ===
-omniMath omniMath;
+omniMath myMath;
 
 void setup() {
     //=== Initialize Serial connection ===
@@ -23,7 +23,7 @@ void loop() {
      * convertUnit function converts values between specified units.
      * Here: converting 100 degrees Celsius to Fahrenheit.
      */
-    String convertedTemp = omniMath.convertUnit("100", omniMath.degC, omniMath.degF);
+    String convertedTemp = myMath.convertUnit("100", myMath.degC, myMath.degF);
     //
     //---- Printing converted temp ----
     Serial.print("Converted temp: ");
@@ -34,7 +34,7 @@ void loop() {
      * Converts mass units using defined constants.
      * Here: converting 1 Kilogram to Pounds (lb).
      */
-    String convertedMass = omniMath.convertUnit("1", omniMath.kg, omniMath.lb);
+    String convertedMass = myMath.convertUnit("1", myMath.kg, myMath.lb);
     //
     //---- Printing converted mass ----
     Serial.print("Converted mass: ");
@@ -45,7 +45,7 @@ void loop() {
      * Converts length units.
      * Here: converting 100 Feet to Meters.
      */
-    String convertedLength = omniMath.convertUnit("100", omniMath.ft, omniMath.m);
+    String convertedLength = myMath.convertUnit("100", myMath.ft, myMath.m);
     //
     //---- Printing converted length ----
     Serial.print("Converted length: ");
@@ -56,7 +56,7 @@ void loop() {
      * Converts electric charge units.
      * Here: converting 2500 milliamp-hours (mAh) to Coulombs (C).
      */
-    String convertedCharge = omniMath.convertUnit("2500", omniMath.mAh, omniMath.C);
+    String convertedCharge = myMath.convertUnit("2500", myMath.mAh, myMath.C);
     //
     //---- Printing converted charge ----
     Serial.print("Converted charge: ");
