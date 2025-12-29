@@ -2,8 +2,11 @@
 #define OMNIMATH_H
     #include <Arduino.h>
 
+    
+
     class omniMath{
         public:
+            omniMath();
             enum UnitType {
                 // Length (Base: m)
                 m,

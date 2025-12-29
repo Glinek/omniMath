@@ -1,5 +1,7 @@
 #include "omniMath.h"
 
+omniMath::omniMath(){
+}
 
 /*
  * name:    convertToRPN
